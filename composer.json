@@ -1,0 +1,26 @@
+{
+    "name": "mdbhojwani/magento2-cms-importer",
+    "description": "Magento 2 Import/Export CMS Blocks and Pages",
+    "keywords": ["magento", "magento2", "magento2 extension", "magento 2 extension", "extension", "module", "magento2 module", "import", "importer", "cms import", "cms importer"],
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "homepage": "https://github.com/mdbhojwani/magento2-cms-importer",
+    "authors": [
+    {
+        "name": "Manish Bhojwani",
+        "email": "manishbhojwani3@gmail.com",
+        "homepage": "https://github.com/mdbhojwani"
+    }
+    ],
+    "license": [
+        "OSL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Mdbhojwani\\CmsImporter\\": ""
+        }
+    }
+}
