@@ -9,7 +9,7 @@
 
 ## Summary
 
-Module is used to import and export CMS Blocks and Pages.
+Module is used to import or export CMS Blocks and Pages.
 
 ## Installation
 
@@ -29,7 +29,6 @@ bin/magento cache:flush
 1. Login to Magento Backend
 2. Navigate to Content > Elements > Import/Export
 ```
-- Module Configuration
 
 ![Module Configuration Screen](media/slide-1.png)
 
