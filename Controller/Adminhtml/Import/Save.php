@@ -81,18 +81,18 @@ class Save extends \Magento\Backend\App\Action
                 $file = $_FILES['import_file'];
                 if ($data['import_type'] == 1) {
                     $this->getBlock($file);
-                } elseif ($data['import_type'] == 2) {
+                } else if ($data['import_type'] == 2) {
                     $this->getPage($file);
                 } else {
                     $this->messageManager->addError(__("Please Select Import Type"));
                     $this->_redirect('*/*/');
                 }
-            }else{
+            } else {
                 $this->messageManager->addError(__("Please Upload CSV file"));
             }
             
             $this->_redirect('*/*/');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->messageManager->addError(__($e->getMessage()));
             $this->_redirect('*/*/');
         }
@@ -125,7 +125,7 @@ class Save extends \Magento\Backend\App\Action
      */
     protected function getBlock($file)
     {
-        if($file['size'] && $file){
+        if ($file['size'] && $file) {
             if (!isset($file['tmp_name'])) {
                 throw new \Magento\Framework\Exception\LocalizedException(__('Invalid file upload attempt.'));
             }
@@ -141,8 +141,9 @@ class Save extends \Magento\Backend\App\Action
                 $cmsBlock = $this->saveCmsBlock($data['block']);
                 $cmsBlock->unsetData();
             }
-            $this->messageManager->addSuccess(__("Content Data Updated"));
-        }else{
+
+            $this->messageManager->addSuccess(__("CMS Blocks Data Updated Successfully."));
+        } else {
             $this->messageManager->addError(__("File is empty"));
         }
     }
@@ -173,8 +174,9 @@ class Save extends \Magento\Backend\App\Action
                         ->setStores([Store::DEFAULT_STORE_ID])
                         ->save();
             }
-            $this->messageManager->addSuccess(__("Content Data Updated"));
-        }else{
+
+            $this->messageManager->addSuccess(__("CMS Pages Updated Successfully."));
+        } else {
             $this->messageManager->addError(__("File is empty"));
         }
     }

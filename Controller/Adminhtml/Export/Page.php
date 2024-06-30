@@ -23,6 +23,13 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 class Page extends \Magento\Backend\App\Action
 {
     /**
+     * Class Contants
+     */
+    const EXPORT_DIR    = 'export/';
+    const FILE_PREFIX   = 'page-data-';
+    const FILE_SUFIX    = '.csv';
+
+    /**
      * @var FileFactory
      */
     protected $fileFactory;
@@ -77,8 +84,8 @@ class Page extends \Magento\Backend\App\Action
         $searchCriteria = $this->searchCriteriaBuilder->create();
         $cmsBlocks = $this->pageRepository->getList($searchCriteria)->getItems();
 
-        $name = date('m-d-Y-H-i-s');
-        $filepath = 'export/page-data-' .$name. '.csv'; // at Directory path Create a Folder Export and FIle
+        $fileName = self::FILE_PREFIX . date('m-d-Y-H-i-s') . self::FILE_SUFIX;
+        $filepath = self::EXPORT_DIR . $fileName;
         $this->directory->create('export');
 
         $stream = $this->directory->openFile($filepath, 'w+');
@@ -86,9 +93,8 @@ class Page extends \Magento\Backend\App\Action
 
         $columns = ['title','page_layout','meta_keyword','meta_description','identifier','content_heading','content','store_id', 'is_active'];
 
-        foreach ($columns as $column) 
-        {
-            $header[] = $column; //storecolumn in Header array
+        foreach ($columns as $column) {
+            $header[] = $column;
         }
 
         $stream->writeCsv($header);
@@ -112,7 +118,6 @@ class Page extends \Magento\Backend\App\Action
         $content['value'] = $filepath;
         $content['rm'] = '1'; //remove csv from var folder
 
-        $csvfilename = 'pages-data-'.$name.'.csv';
-        return $this->fileFactory->create($csvfilename, $content, DirectoryList::VAR_DIR);
+        return $this->fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }
 }
